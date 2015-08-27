@@ -93,13 +93,13 @@ func (a *Uint64) Add(δ uint64) uint64 {
 
 // Sub atomically subtracts δ from *a and returns the new value.
 func (a *Uint64) Sub(δ uint64) uint64 {
-	// See https://golang.org/search?q=atomic.AddUint32
+	// See https://golang.org/search?q=atomic.AddUint64
 	return atomic.AddUint64(&a.uint64, ^(δ - 1))
 }
 
 // Dec atomically decrements *a.
 func (a *Uint64) Dec() uint64 {
-	// See https://golang.org/search?q=atomic.AddUint32
+	// See https://golang.org/search?q=atomic.AddUint64
 	return atomic.AddUint64(&a.uint64, ^uint64(0))
 }
 
