@@ -42,9 +42,9 @@ func (a *Uint32) Add(δ uint32) uint32 {
 }
 
 // Sub atomically subtracts δ from *a and returns the new value.
-func (a *Uint32) Sub(v uint32) uint32 {
+func (a *Uint32) Sub(δ uint32) uint32 {
 	// See https://golang.org/search?q=atomic.AddUint32
-	return atomic.AddUint32(&a.uint32, ^(v - 1))
+	return atomic.AddUint32(&a.uint32, ^(δ - 1))
 }
 
 // Dec atomically decrements *a.
@@ -138,13 +138,13 @@ func (a *Int32) CompareAndSwap(old, new int32) (swapped bool) {
 }
 
 // Add atomically adds δ to *a and returns the new value.
-func (a *Int32) Add(v int32) int32 {
-	return atomic.AddInt32(&a.int32, v)
+func (a *Int32) Add(δ int32) int32 {
+	return atomic.AddInt32(&a.int32, δ)
 }
 
 // Sub atomically subtracts δ from *a and returns the new value.
-func (a *Int32) Sub(v int32) int32 {
-	return atomic.AddInt32(&a.int32, -v)
+func (a *Int32) Sub(δ int32) int32 {
+	return atomic.AddInt32(&a.int32, -δ)
 }
 
 // Dec atomically decrements *a.
@@ -262,7 +262,7 @@ func (o *Once) Do(f func()) {
 	f()
 }
 
-// First is an object that will return true exactl once.
+// First is an object that will return true exactly once.
 type First struct{ Uint32 }
 
 // First returns true if it is the first time it is called on this very instance.
