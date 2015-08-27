@@ -9,6 +9,8 @@ What's wrong with it?
 
 This package provides a uniform, clean interfaces and type safety.
 
-Bonus: Once which can happily replace [sync.Once](http://golang.org/pkg/sync/#Once) and it's close relative First.
+Bonus: [Once](https://godoc.org/github.com/sasha-s/atomic#Once) which can happily replace [sync.Once](http://golang.org/pkg/sync/#Once) and it's close relative [First](https://godoc.org/github.com/sasha-s/atomic#First).
+
+Docs are [here](https://godoc.org/github.com/sasha-s/atomic).
 
 
