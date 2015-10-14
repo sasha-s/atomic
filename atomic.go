@@ -249,26 +249,26 @@ func CreateValue(v interface{}) Value {
 // Once is an object that will perform exactly one action.
 // Similar to sync.Once, but uses less memory and is as fast.
 // See http://golang.org/pkg/sync/#Once
-type Once struct{ Uint32 }
+type Once struct{ x Uint32 }
 
 // Do calls the function f if and only if Do is being called for the first time for this instance of Once.
 func (o *Once) Do(f func()) {
-	if o.Uint32.Load() == 1 {
+	if o.x.Load() == 1 {
 		return
 	}
-	if o.Uint32.Swap(1) == 1 {
+	if o.x.Swap(1) == 1 {
 		return
 	}
 	f()
 }
 
 // First is an object that will return true exactly once.
-type First struct{ Uint32 }
+type First struct{ x Uint32 }
 
 // First returns true if it is the first time it is called on this very instance.
 func (f *First) First() bool {
-	if f.Uint32.Load() == 1 {
+	if f.x.Load() == 1 {
 		return false
 	}
-	return f.Uint32.Swap(1) == 0
+	return f.x.Swap(1) == 0
 }
