@@ -18,12 +18,12 @@ func TestOnce(t *testing.T) {
 	for g := 0; g < 1000; g++ {
 		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			once.Do(c.Inc)
 			if c.uint64 != 1 {
 				t.Errorf("expected 1, got %d", c.uint64)
 			}
 		}()
-		wg.Done()
 	}
 	wg.Wait()
 	if c.uint64 != 1 {
@@ -38,14 +38,15 @@ func TestFirst(t *testing.T) {
 	for g := 0; g < 1000; g++ {
 		wg.Add(1)
 		go func() {
+			defer wg.Done()
 			if first.First() {
 				c.Inc()
 			}
-			if c.uint64 != 1 {
-				t.Errorf("expected 1, got %d", c.uint64)
-			}
+			// Note: uncommenting this would lead to data race.
+			// if c.uint64 != 1 {
+			// 	t.Errorf("expected 1, got %d", c.uint64)
+			// }
 		}()
-		wg.Done()
 	}
 	wg.Wait()
 	if c.uint64 != 1 {
